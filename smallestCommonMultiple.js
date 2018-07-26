@@ -6,8 +6,36 @@
 
 // For example, if given 1 and 3, find the smallest common multiple of both 1 and 3 that is also evenly divisible by all numbers between 1 and 3. The answer here would be 6.
 //
+
+function getRange(arr) {
+  var max = Math.max(arr[0], arr[1]);
+  var min = Math.min(arr[0], arr[1]);
+  var range = [];
+
+  for (var i = min; i <= max; i++) {
+    range.push(i);
+  }
+
+  return range;
+}
+
 function smallestCommons(arr) {
-  return arr;
+  var range = getRange(arr);
+  var max = range[range.length - 1];
+  var factor = 1;
+
+  while (true) {
+    var multiple = factor * max;
+    var multAll = range.every(function(num) {
+      return multiple % num === 0
+    })
+
+    if (multAll) {
+      return multiple;
+    }
+
+    factor++;
+  }
 }
 
 
